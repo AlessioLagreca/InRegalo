@@ -12,6 +12,8 @@ import { SelectCategoria } from "./ui/select-categoria";
 
 const formSchema = z.object({
 	titolo: z.string().min(2).max(50),
+	descrizione: z.string().min(2).max(500),
+	categoria: z.string().min(2).max(50),
 });
 
 export default function FormAnnuncio() {
@@ -41,7 +43,7 @@ export default function FormAnnuncio() {
 							<FormItem>
 								<FormLabel>Titolo</FormLabel>
 								<FormControl>
-									<Input {...field} />
+									<Input required {...field} />
 								</FormControl>
 								<FormDescription>Titolo dell'annuncio</FormDescription>
 								<FormMessage />
@@ -50,12 +52,12 @@ export default function FormAnnuncio() {
 					/>
 					<FormField
 						control={form.control}
-						name='titolo'
+						name='descrizione'
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Descrizione</FormLabel>
 								<FormControl>
-									<Textarea className='h-[200px]' placeholder='Descrizione' {...field} />
+									<Textarea required className='h-[200px]' placeholder='Descrizione' {...field} />
 								</FormControl>
 								<FormDescription>Descrizione dell'annuncio</FormDescription>
 								<FormMessage />
@@ -64,7 +66,7 @@ export default function FormAnnuncio() {
 					/>
 					<FormField
 						control={form.control}
-						name='titolo'
+						name='categoria'
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Descrizione</FormLabel>
