@@ -44,8 +44,8 @@ export default function FormAnnuncio() {
 					console.error("Errore durante l'inserimento delle informazioni nel database:", response.error);
 					toast.error("Errore durante l'inserimento delle informazioni nel database:" + response.error);
 				} else {
-					console.log("Inserimento effettuato con successo:", response.data);
-					toast.success("Inserimento effettuato con successo:" + response.data);
+					console.log("Inserimento effettuato con successo");
+					toast.success("Inserimento effettuato con successo");
 				}
 			});
 	}
