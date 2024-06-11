@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import Container from "@/components/wrappers/container";
 import { Button } from "@/components/ui/button";
+import MieiAnnunci from "@/components/MieiAnnunci";
 
 export default async function ProtectedPage() {
 	const supabase = createClient();
@@ -40,6 +41,7 @@ export default async function ProtectedPage() {
 					<Link href='/nuovo_annuncio'>
 						<Button className='bg-green-500 hover:bg-green-600 font-bold'>Inserisci annuncio</Button>
 					</Link>
+					<MieiAnnunci />
 				</div>
 
 				<footer className='flex justify-center p-8 w-full text-xs text-center border-t border-t-foreground/10'>
