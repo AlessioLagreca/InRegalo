@@ -32,11 +32,10 @@ const formSchema = z.object({
 	titolo: z.string().min(2).max(50),
 	descrizione: z.string().min(2).max(500),
 	categoria: z.string().min(2).max(50),
-	immagine: z.string().min(2).max(200),
+	immagine: z.string().optional(),
 });
 
 export default function FormAnnuncio() {
-	const [file, setFile] = useState<File | undefined>(undefined);
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
 	// 1. Definiamo il form.
@@ -51,11 +50,6 @@ export default function FormAnnuncio() {
 	// Creiamo il client supabase.
 	const supabase = createClient();
 
-	// Funzione per gestire l'immagine
-	const handleImmagine = async (event: React.ChangeEvent<HTMLInputElement>) => {
-		setSelectedFile(event.target.files?.[0] || null);
-	};
-
 	const uploadFileToS3 = async (file: File) => {
 		const formData = new FormData();
 		formData.append("file", file);
@@ -69,40 +63,36 @@ export default function FormAnnuncio() {
 			const result = await response.json();
 			return result.url;
 		} else {
-			console.error("Errore durante il caricamento dell'immagine");
+			throw new Error("Errore durante il caricamento dell'immagine");
 		}
 	};
 
-	// 2. DEFINIAMO IL SUBMIT HANDLER.
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		if (selectedFile) {
-			const result = await uploadFileToS3(selectedFile);
-			values.immagine = result;
-		}
+		try {
+			if (selectedFile) {
+				const imageUrl = await uploadFileToS3(selectedFile);
+				values.immagine = imageUrl;
+			}
 
-		// something here
-		supabase
-			.from("Annunci")
-			.insert({
+			const { error } = await supabase.from("Annunci").insert({
 				title: values.titolo,
 				description: values.descrizione,
 				category: values.categoria,
-			})
-			.then((response) => {
-				if (response.error) {
-					console.error(
-						"Errore durante l'inserimento delle informazioni nel database:",
-						response.error
-					);
-					toast.error(
-						"Errore durante l'inserimento delle informazioni nel database:" +
-							response.error
-					);
-				} else {
-					console.log("Inserimento effettuato con successo");
-					toast.success("Inserimento effettuato con successo");
-				}
+				image: values.immagine,
 			});
+
+			if (error) throw error;
+
+			toast.success("Inserimento effettuato con successo");
+		} catch (error) {
+			console.error(
+				"Errore durante l'inserimento delle informazioni nel database:",
+				error
+			);
+			toast.error(
+				"Errore durante l'inserimento delle informazioni nel database."
+			);
+		}
 	};
 
 	return (
@@ -182,13 +172,17 @@ export default function FormAnnuncio() {
 							render={({ field: { onChange, value, ...fieldProps } }) => (
 								<FormItem>
 									<FormLabel>Immagine</FormLabel>
-
-									{/* <Input type='file' {...field} /> */}
-									<ProvaImmagine2
-										onChange={handleImmagine}
-										value={value}
-										{...fieldProps}
-									/>
+									<FormControl>
+										<Input
+											type='file'
+											onChange={(e) => {
+												setSelectedFile(e.target.files?.[0] || null);
+											}}
+											{...fieldProps}
+										/>
+									</FormControl>
+									<FormDescription>Immagine dell'annuncio</FormDescription>
+									<FormMessage />
 								</FormItem>
 							)}
 						/>
