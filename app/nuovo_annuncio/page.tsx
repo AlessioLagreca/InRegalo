@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import Container from "@/components/wrappers/container";
 import FormAnnuncio from "@/components/form-annuncio";
+import ProvaImmagine from "@/components/prova-immagine";
 
 export default async function ProtectedPage() {
 	const supabase = createClient();
