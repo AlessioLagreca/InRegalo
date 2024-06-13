@@ -24,19 +24,23 @@ import { z } from "zod";
 import { Textarea } from "./ui/textarea";
 import { createClient } from "@/utils/supabase/client";
 import { Toaster, toast } from "sonner";
-import ProvaImmagine from "./prova-immagine";
 import { useState } from "react";
-import ProvaImmagine2 from "./prova-immagine2";
+
+interface Props {
+	id: string;
+}
 
 const formSchema = z.object({
 	titolo: z.string().min(2).max(50),
 	descrizione: z.string().min(2).max(500),
 	categoria: z.string().min(2).max(50),
 	immagine: z.string().optional(),
+	user_id: z.string().min(2).max(500),
 });
 
-export default function FormAnnuncio() {
+const FormAnnuncio: React.FC<Props> = ({ id }) => {
 	const [selectedFile, setSelectedFile] = useState<File | null>(null);
+	console.log(id);
 
 	// 1. Definiamo il form.
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -45,6 +49,7 @@ export default function FormAnnuncio() {
 			titolo: "",
 			descrizione: "",
 			categoria: "",
+			user_id: id,
 		},
 	});
 	// Creiamo il client supabase.
@@ -79,9 +84,15 @@ export default function FormAnnuncio() {
 				description: values.descrizione,
 				category: values.categoria,
 				image: values.immagine,
+				user_id: id,
 			});
 
-			if (error) throw error;
+			if (error) {
+				throw error;
+				toast.error(
+					"Errore durante l'inserimento delle informazioni nel database."
+				);
+			}
 
 			toast.success("Inserimento effettuato con successo");
 		} catch (error) {
@@ -142,25 +153,31 @@ export default function FormAnnuncio() {
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>Categoria</FormLabel>
-									<Select
-										onValueChange={field.onChange}
-										defaultValue={field.value}
-									>
-										<SelectTrigger>
-											<SelectValue placeholder='Tutte le categorie' />
-										</SelectTrigger>
+									<FormControl>
+										<Select
+											onValueChange={field.onChange}
+											defaultValue={field.value}
+											{...field}
+										>
+											<SelectTrigger>
+												<SelectValue placeholder='Tutte le categorie' />
+											</SelectTrigger>
 
-										<SelectContent>
-											<SelectItem value='tutte le categorie'>
-												Tutte le categorie
-											</SelectItem>
-											<SelectItem value='elettronica'>Elettronica</SelectItem>
-											<SelectItem value='libri'>Libri</SelectItem>
-											<SelectItem value='musica'>Musica</SelectItem>
-											<SelectItem value='sport'>Sport</SelectItem>
-											<SelectItem value='tempo libero'>Tempo libero</SelectItem>
-										</SelectContent>
-									</Select>
+											<SelectContent>
+												<SelectItem value='tutte le categorie'>
+													Tutte le categorie
+												</SelectItem>
+												<SelectItem value='elettronica'>Elettronica</SelectItem>
+												<SelectItem value='libri'>Libri</SelectItem>
+												<SelectItem value='musica'>Musica</SelectItem>
+												<SelectItem value='sport'>Sport</SelectItem>
+												<SelectItem value='tempo libero'>
+													Tempo libero
+												</SelectItem>
+											</SelectContent>
+										</Select>
+									</FormControl>
+
 									<FormDescription>Categoria dell'annuncio</FormDescription>
 									<FormMessage />
 								</FormItem>
@@ -195,4 +212,6 @@ export default function FormAnnuncio() {
 			</div>
 		</>
 	);
-}
+};
+
+export default FormAnnuncio;

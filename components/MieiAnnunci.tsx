@@ -8,16 +8,24 @@ interface Annuncio {
 	title: string;
 	description: string;
 	category: string;
+	user_id: string;
 }
 
-const MieiAnnunci = () => {
+interface Props {
+	id: string;
+}
+
+const MieiAnnunci: React.FC<Props> = ({ id }) => {
 	const [annunci, setAnnunci] = useState<Annuncio[]>([]);
 
-	// Chiede i dati alla tabella Annunci appena il componente viene montato
+	// Chiede i dati dell'utente appena il componente viene montato
 	useEffect(() => {
 		const fetchAnnunci = async () => {
 			const supabase = createClient();
-			const { data, error } = await supabase.from("Annunci").select("*");
+			const { data, error } = await supabase
+				.from("Annunci")
+				.select()
+				.eq("user_id", id);
 
 			if (error) {
 				console.error("Error fetching annunci:", error);
@@ -33,7 +41,7 @@ const MieiAnnunci = () => {
 	return (
 		<div>
 			<h1 className='text-2xl font-bold mb-4'>I tuoi Annunci</h1>
-			<div className='flex gap-8'>
+			<div className='flex flex-wrap gap-8'>
 				{annunci.map((annuncio) => (
 					<div
 						key={annuncio.id}

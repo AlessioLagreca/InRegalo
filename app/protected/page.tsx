@@ -39,9 +39,12 @@ export default async function ProtectedPage() {
 
 				<div className='flex flex-col flex-1 gap-20 px-3 max-w-4xl opacity-01 animate-in'>
 					<Link href='/nuovo_annuncio'>
-						<Button className='bg-green-500 hover:bg-green-600 font-bold'>Inserisci annuncio</Button>
+						<Button className='bg-green-500 hover:bg-green-600 font-bold'>
+							Inserisci annuncio
+						</Button>
 					</Link>
-					<MieiAnnunci />
+					<MieiAnnunci id={user?.id} />
+					<p>Hello {user?.id}</p>
 				</div>
 
 				<footer className='flex justify-center p-8 w-full text-xs text-center border-t border-t-foreground/10'>
