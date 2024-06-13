@@ -27,6 +27,7 @@ export default async function ProtectedPage() {
 					<nav className='flex justify-center w-full h-16 border-b border-b-foreground/10'>
 						<div className='flex justify-between items-center p-3 w-full max-w-4xl text-sm'>
 							<Link
+								prefetch={false}
 								href='/protected'
 								className='text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-500'
 							>
@@ -37,8 +38,10 @@ export default async function ProtectedPage() {
 					</nav>
 				</div>
 
+				{/* SEZIONE ANNUNCI */}
+
 				<div className='flex flex-col flex-1 gap-20 px-3 max-w-4xl opacity-01 animate-in'>
-					<Link href='/nuovo_annuncio'>
+					<Link prefetch={false} href='/nuovo_annuncio'>
 						<Button className='bg-green-500 hover:bg-green-600 font-bold'>
 							Inserisci annuncio
 						</Button>
@@ -46,6 +49,8 @@ export default async function ProtectedPage() {
 					<MieiAnnunci id={user?.id} />
 					<p>Hello {user?.id}</p>
 				</div>
+
+				{/* FOOTER */}
 
 				<footer className='flex justify-center p-8 w-full text-xs text-center border-t border-t-foreground/10'>
 					<p>

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
+import Image from "next/image";
 
 interface Annuncio {
 	id: string;
@@ -47,6 +48,7 @@ const MieiAnnunci: React.FC<Props> = ({ id }) => {
 						key={annuncio.id}
 						className='cursor-pointer border border-input bg-background hover:bg-accent hover:text-accent-foreground items-center justify-center whitespace-nowrap rounded-md text-base font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 p-4'
 					>
+						{/* <Image src={annuncio.image} alt={annuncio.title} /> */}
 						<h3>{annuncio.title}</h3>
 						<p>{annuncio.description}</p>
 						<p>Categoria: {annuncio.category}</p>

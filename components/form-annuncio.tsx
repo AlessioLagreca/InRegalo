@@ -66,7 +66,8 @@ const FormAnnuncio: React.FC<Props> = ({ id }) => {
 
 		if (response.ok) {
 			const result = await response.json();
-			return result.url;
+			console.log("filename: ", result.fileName);
+			return result.fileName;
 		} else {
 			throw new Error("Errore durante il caricamento dell'immagine");
 		}
@@ -88,7 +89,6 @@ const FormAnnuncio: React.FC<Props> = ({ id }) => {
 			});
 
 			if (error) {
-				throw error;
 				toast.error(
 					"Errore durante l'inserimento delle informazioni nel database."
 				);

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 // Creiamo il client S3
 const s3client = new S3Client({
@@ -25,20 +26,26 @@ export async function POST(request: Request) {
 	}
 
 	const fileName = encodeURIComponent(file.name);
+	console.log(fileName);
 	const fileType = file.type;
 
 	try {
 		const arrayBuffer = await file.arrayBuffer();
 		const fileBuffer = Buffer.from(arrayBuffer);
 
-		const putObjectCommand = new PutObjectCommand({
+		const command = new PutObjectCommand({
 			Bucket: process.env.AWS_S3_BUCKET_NAME,
 			Key: fileName,
 			Body: fileBuffer,
 			ContentType: fileType,
 		});
 
-		await s3client.send(putObjectCommand);
+		await s3client.send(command);
+
+		// Get the signed URL
+		const signedUrl = await getSignedUrl(s3client, command, {
+			expiresIn: 3600,
+		});
 
 		return NextResponse.json({ success: true, fileName });
 	} catch (error) {
