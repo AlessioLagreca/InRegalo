@@ -66,8 +66,8 @@ const FormAnnuncio: React.FC<Props> = ({ id }) => {
 
 		if (response.ok) {
 			const result = await response.json();
-			console.log("filename: ", result.fileName);
-			return result.fileName;
+			console.log("url: ", result.url);
+			return result.url;
 		} else {
 			throw new Error("Errore durante il caricamento dell'immagine");
 		}

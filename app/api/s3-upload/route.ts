@@ -29,6 +29,9 @@ export async function POST(request: Request) {
 	console.log(fileName);
 	const fileType = file.type;
 
+	// concateniamo insieme i parametri per ottenere l'url
+	const url = `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_S3_REGION}.amazonaws.com/${fileName}`;
+
 	try {
 		const arrayBuffer = await file.arrayBuffer();
 		const fileBuffer = Buffer.from(arrayBuffer);
@@ -42,12 +45,7 @@ export async function POST(request: Request) {
 
 		await s3client.send(command);
 
-		// Get the signed URL
-		const signedUrl = await getSignedUrl(s3client, command, {
-			expiresIn: 3600,
-		});
-
-		return NextResponse.json({ success: true, fileName });
+		return NextResponse.json({ success: true, url });
 	} catch (error) {
 		return NextResponse.json({ error: "Error uploading file to S3" });
 	}
