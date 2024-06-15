@@ -4,9 +4,6 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import Container from "@/components/wrappers/container";
 import { Button } from "@/components/ui/button";
-import MieiAnnunci from "@/components/MieiAnnunci";
-import { Input } from "@/components/ui/input";
-import SearchBar from "@/components/search-bar";
 
 export default async function ProtectedPage() {
 	const supabase = createClient();
@@ -42,7 +39,7 @@ export default async function ProtectedPage() {
 
 				{/* SEZIONE ANNUNCI */}
 
-				<div className='flex flex-col flex-1 justify-center items-center gap-20 px-3 max-w-4xl opacity-01 animate-in'>
+				<div className='flex flex-col flex-1 items-center gap-20 px-3 max-w-4xl opacity-01 animate-in w-full'>
 					<div className='p-4 border-2 border-zinc-200 rounded-md w-full'>
 						<div className='flex gap-4 w-full'>
 							<Link
@@ -99,10 +96,11 @@ export default async function ProtectedPage() {
 							</Link>
 						</div>
 					</div>
-					<SearchBar />
-					<MieiAnnunci id={user?.id} />
-					<p>Hello {user?.id}</p>
 				</div>
+
+				{/* RISULTATI RICERCA */}
+
+				<div className='text-3xl'>se nella pagina di ricerca</div>
 
 				{/* FOOTER */}
 
