@@ -4,10 +4,12 @@ import { Input } from "@/components/ui/input";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Annuncio } from "./MieiAnnunci";
 
 export default function SearchBar() {
 	const [elementoRicerca, setElementoRicerca] = useState("");
-	const [risultatoRIcerca, setRisultatoRicerca] = useState<any[]>([]);
+	const [risultatoRicerca, setRisultatoRicerca] = useState<Annuncio[]>([]);
+	// estraggo il setRisultatiRicerca dal context
 	const supabase = createClient();
 	// definiamo il router, sempre nel body del componente
 	const router = useRouter();
@@ -21,8 +23,8 @@ export default function SearchBar() {
 				.select()
 				.textSearch("description", elementoRicerca);
 
-			// do something with data
 			console.log(data);
+			// aggiorno il context con i risultati della ricerca
 			setRisultatoRicerca(data || []);
 
 			router.push("/ricerca");

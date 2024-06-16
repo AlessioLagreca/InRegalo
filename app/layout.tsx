@@ -1,5 +1,4 @@
 import { GeistSans } from "geist/font/sans";
-import { RicercaProvider } from "@/components/wrappers/RicercaContext";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -20,9 +19,7 @@ export default function RootLayout({
 	return (
 		<html lang='en' className={GeistSans.className}>
 			<body>
-				<RicercaProvider>
-					<div className='mx-auto max-w-4xl'>{children}</div>
-				</RicercaProvider>
+				<div className='mx-auto max-w-4xl'>{children}</div>
 			</body>
 		</html>
 	);
