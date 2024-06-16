@@ -1,9 +1,11 @@
 import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import Link from "next/link";
 import Container from "@/components/wrappers/container";
 import { Button } from "@/components/ui/button";
+import { cookies } from "next/headers";
+import Image from "next/image";
 
 export default async function ProtectedPage() {
 	const supabase = createClient();
@@ -15,6 +17,15 @@ export default async function ProtectedPage() {
 	if (!user) {
 		return redirect("/login");
 	}
+
+	// recupero il valore della ricerca dai cookie e chiamo il database per cercare gli annunci che corrispondono alla ricerca
+
+	const query = cookies().get("query");
+
+	const { data, error } = await supabase
+		.from("Annunci")
+		.select()
+		.textSearch("description", query?.value || "");
 
 	return (
 		<Container>
@@ -100,7 +111,24 @@ export default async function ProtectedPage() {
 
 				{/* RISULTATI RICERCA */}
 
-				<div className='text-3xl'>se nella pagina di ricerca</div>
+				{/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+
+				{data?.map((annuncio) => (
+					<div
+						key={annuncio.id}
+						className='cursor-pointer border border-input bg-background hover:bg-accent hover:text-accent-foreground items-center justify-center whitespace-nowrap rounded-md text-base font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 p-4'
+					>
+						<Image
+							src={annuncio.image}
+							alt={annuncio.title}
+							width={300}
+							height={300}
+						/>
+						<h3 className='text-lg font-bold'>{annuncio.title}</h3>
+						<p>{annuncio.description}</p>
+						<p>Categoria: {annuncio.category}</p>
+					</div>
+				))}
 
 				{/* FOOTER */}
 

@@ -1,33 +1,22 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Annuncio } from "./MieiAnnunci";
+import Cookies from "js-cookie";
 
 export default function SearchBar() {
 	const [elementoRicerca, setElementoRicerca] = useState("");
-	const [risultatoRicerca, setRisultatoRicerca] = useState<Annuncio[]>([]);
-	// estraggo il setRisultatiRicerca dal context
-	const supabase = createClient();
-	// definiamo il router, sempre nel body del componente
+
 	const router = useRouter();
 
 	const gestisciRicerca = async (
 		event: React.KeyboardEvent<HTMLInputElement>
 	) => {
 		if (event.key === "Enter") {
-			const { data, error } = await supabase
-				.from("Annunci")
-				.select()
-				.textSearch("description", elementoRicerca);
-
-			console.log(data);
-			// aggiorno il context con i risultati della ricerca
-			setRisultatoRicerca(data || []);
-
-			router.push("/ricerca");
+			Cookies.set("query", elementoRicerca);
+			console.log(Cookies.get("query"));
+			router.push(`/ricerca`);
 		}
 	};
 
