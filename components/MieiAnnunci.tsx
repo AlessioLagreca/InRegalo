@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 
-interface Annuncio {
+export interface Annuncio {
 	id: string;
 	title: string;
 	description: string;

@@ -7,6 +7,7 @@ import { useState } from "react";
 
 export default function SearchBar() {
 	const [elementoRicerca, setElementoRicerca] = useState("");
+	const [risultatoRIcerca, setRisultatoRicerca] = useState<any[]>([]);
 	const supabase = createClient();
 	// definiamo il router, sempre nel body del componente
 	const router = useRouter();
@@ -18,9 +19,11 @@ export default function SearchBar() {
 			const { data, error } = await supabase
 				.from("Annunci")
 				.select()
-				.textSearch("description", `'big'`);
+				.textSearch("description", elementoRicerca);
 
 			// do something with data
+			console.log(data);
+			setRisultatoRicerca(data || []);
 
 			router.push("/ricerca");
 		}
