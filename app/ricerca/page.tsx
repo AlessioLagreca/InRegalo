@@ -2,7 +2,7 @@
 
 import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import { redirect, useParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import Container from "@/components/wrappers/container";
 import { Button } from "@/components/ui/button";
@@ -133,8 +133,6 @@ export default async function ProtectedPage() {
 						<p>Categoria: {annuncio.category}</p>
 					</div>
 				))}
-
-				<div>"hasCookie": {JSON.stringify(hasCookie)}</div>
 
 				{/* FOOTER */}
 

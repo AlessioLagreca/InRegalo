@@ -1,14 +1,11 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Cookies from "js-cookie";
 
 export default function SearchBar() {
 	const [elementoRicerca, setElementoRicerca] = useState("");
-
-	const router = useRouter();
 
 	const gestisciRicerca = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === "Enter") {

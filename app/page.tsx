@@ -1,5 +1,4 @@
 import AuthButton from "../components/AuthButton";
-import { createClient } from "@/utils/supabase/server";
 import Header from "@/components/Header";
 import Link from "next/link";
 

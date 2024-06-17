@@ -45,19 +45,19 @@ const MieiAnnunci: React.FC<Props> = ({ id }) => {
 			<h1 className='text-2xl font-bold mb-4'>I tuoi Annunci</h1>
 			<div className='flex flex-wrap gap-8'>
 				{annunci.map((annuncio) => (
-					<div
-						key={annuncio.id}
-						className='cursor-pointer border border-input bg-background hover:bg-accent hover:text-accent-foreground items-center justify-center whitespace-nowrap rounded-md text-base font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 p-4'
-					>
-						<Image
-							src={annuncio.image}
-							alt={annuncio.title}
-							width={300}
-							height={300}
-						/>
+					<div key={annuncio.id}>
+						<div className='cursor-pointer border border-input bg-background hover:bg-accent hover:text-accent-foreground items-center justify-center whitespace-nowrap rounded-md text-base font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 p-2 '>
+							<div className='h-[400px] w-[300px] relative'>
+								<Image
+									src={annuncio.image}
+									alt={annuncio.title}
+									objectFit='cover'
+									fill
+									className='w-full h-full top-0 left-0 object-cover rounded-2xl'
+								/>
+							</div>
+						</div>
 						<h3 className='text-lg font-bold'>{annuncio.title}</h3>
-						<p>{annuncio.description}</p>
-						<p>Categoria: {annuncio.category}</p>
 					</div>
 				))}
 			</div>
