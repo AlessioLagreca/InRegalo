@@ -10,13 +10,19 @@ export default function SearchBar() {
 
 	const router = useRouter();
 
-	const gestisciRicerca = async (
-		event: React.KeyboardEvent<HTMLInputElement>
-	) => {
+	const gestisciRicerca = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === "Enter") {
-			Cookies.set("query", elementoRicerca);
-			console.log(Cookies.get("query"));
-			router.push(`/ricerca`);
+			const vecchioCookie = Cookies.get("query");
+			console.log("elemento ricerca:", elementoRicerca);
+			console.log("vecchio cookie:", vecchioCookie);
+			if (vecchioCookie) {
+				Cookies.remove("query");
+				Cookies.set("query", elementoRicerca);
+				window.location.href = "/ricerca";
+			} else {
+				Cookies.set("query", elementoRicerca);
+				window.location.href = "/ricerca";
+			}
 		}
 	};
 

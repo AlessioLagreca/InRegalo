@@ -20,25 +20,16 @@ export default async function ProtectedPage() {
 		return redirect("/login");
 	}
 
-	/////// controllo se il cookie è presente, se lo è lo elimino ///////
-	async function deleteCookie() {
-		cookieStore.delete("query");
-	}
-
 	const cookieStore = cookies();
-
-	if (cookieStore.has("query")) {
-		deleteCookie();
-	}
-
-	//////// recupero il valore della ricerca dai cookie e chiamo il database per cercare
-	///////  gli annunci che corrispondono alla ricerca ////////
-	const query = cookieStore.get("query");
+	const hasCookie = cookieStore.get("query");
 
 	const { data, error } = await supabase
 		.from("Annunci")
 		.select()
-		.textSearch("description", query?.value || "");
+		.textSearch("description", hasCookie?.value || "");
+	if (error) {
+		console.error(error);
+	}
 
 	return (
 		<Container>
@@ -142,6 +133,8 @@ export default async function ProtectedPage() {
 						<p>Categoria: {annuncio.category}</p>
 					</div>
 				))}
+
+				<div>"hasCookie": {JSON.stringify(hasCookie)}</div>
 
 				{/* FOOTER */}
 

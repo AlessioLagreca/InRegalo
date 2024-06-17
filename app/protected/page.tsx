@@ -5,7 +5,6 @@ import Link from "next/link";
 import Container from "@/components/wrappers/container";
 import { Button } from "@/components/ui/button";
 import MieiAnnunci from "@/components/MieiAnnunci";
-import { Input } from "@/components/ui/input";
 import SearchBar from "@/components/search-bar";
 
 export default async function ProtectedPage() {
