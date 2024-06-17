@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import Container from "@/components/wrappers/container";
 import { Button } from "@/components/ui/button";
-import SearchBar from "@/components/search-bar";
 import MieiAnnunci from "@/components/MieiAnnunci";
+import SearchBar from "@/components/search-bar";
 
 export default async function ProtectedPage() {
 	const supabase = createClient();
@@ -22,9 +22,6 @@ export default async function ProtectedPage() {
 		<Container>
 			<div className='flex flex-col flex-1 gap-4 items-center w-full'>
 				<div className='w-full'>
-					<div className='py-3 font-bold text-center bg-gradient-to-r from-green-100 to-green-200'>
-						Benvenuto in InRegalo, il posto dove gestire i tuoi regali
-					</div>
 					<nav className='flex justify-center w-full h-16 border-b border-b-foreground/10'>
 						<div className='flex justify-between items-center p-3 w-full max-w-4xl text-sm'>
 							<Link
@@ -41,9 +38,9 @@ export default async function ProtectedPage() {
 
 				{/* SEZIONE ANNUNCI */}
 
-				<div className='flex flex-col items-center gap-20 px-3 w-full animate-in'>
+				<div className='flex flex-col flex-1 justify-center items-center gap-20 px-3 max-w-4xl opacity-01 animate-in'>
 					<div className='p-4 border-2 border-zinc-200 rounded-md w-full'>
-						<div className='flex gap-4 w-full'>
+						<div className='flex gap-4 w-full text-center'>
 							<Link
 								prefetch={false}
 								href='/nuovo_annuncio'
@@ -85,7 +82,7 @@ export default async function ProtectedPage() {
 							</Link>
 							<Link
 								prefetch={false}
-								href='/miei_annunci'
+								href='/nuovo_annuncio'
 								className='flex flex-1'
 							>
 								<Button
@@ -98,7 +95,7 @@ export default async function ProtectedPage() {
 							</Link>
 						</div>
 					</div>
-					<SearchBar />
+					<MieiAnnunci id={user?.id} />
 				</div>
 
 				{/* FOOTER */}
