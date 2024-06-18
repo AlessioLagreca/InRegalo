@@ -41,7 +41,7 @@ export default async function ProtectedPage() {
 
 				{/* SEZIONE ANNUNCI */}
 
-				<div className='flex flex-col items-center gap-20 px-3 w-full animate-in'>
+				<div className='flex flex-col items-center gap-20 px-3 w-full animate-in mb-auto'>
 					<div className='p-4 border-2 border-zinc-200 rounded-md w-full'>
 						<div className='flex gap-4 w-full'>
 							<Link
@@ -99,6 +99,11 @@ export default async function ProtectedPage() {
 						</div>
 					</div>
 					<SearchBar />
+					<div className='flex flex-col gap-4 w-full justify-center items-center'>
+						<h1 className='text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-500'>
+							Dai via quello che non vuoi +
+						</h1>
+					</div>
 				</div>
 
 				{/* FOOTER */}
