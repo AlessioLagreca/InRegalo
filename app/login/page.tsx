@@ -5,7 +5,11 @@ import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
 import Container from "@/components/wrappers/container";
 
-export default function Login({ searchParams }: { searchParams: { message: string } }) {
+export default function Login({
+	searchParams,
+}: {
+	searchParams: { message: string };
+}) {
 	const signIn = async (formData: FormData) => {
 		"use server";
 
@@ -22,7 +26,7 @@ export default function Login({ searchParams }: { searchParams: { message: strin
 			return redirect("/login?message=Could not authenticate user");
 		}
 
-		return redirect("/protected");
+		return redirect("/");
 	};
 
 	const signUp = async (formData: FormData) => {
@@ -107,7 +111,9 @@ export default function Login({ searchParams }: { searchParams: { message: strin
 						Sign Up
 					</SubmitButton>
 					{searchParams?.message && (
-						<p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>{searchParams.message}</p>
+						<p className='mt-4 p-4 bg-foreground/10 text-foreground text-center'>
+							{searchParams.message}
+						</p>
 					)}
 				</form>
 			</div>

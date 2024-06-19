@@ -6,6 +6,12 @@ import { Button } from "@/components/ui/button";
 import SearchBar from "@/components/search-bar";
 
 export default async function ProtectedPage() {
+	const supabase = createClient();
+
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+
 	return (
 		<Container>
 			<div className='flex flex-col flex-1 gap-4 items-center w-full'>
