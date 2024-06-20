@@ -23,7 +23,7 @@ export default async function ProtectedPage() {
 						<div className='flex justify-between items-center p-3 w-full max-w-4xl text-sm'>
 							<Link
 								prefetch={false}
-								href='/protected'
+								href='/'
 								className='text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-500'
 							>
 								InRegalo
@@ -35,7 +35,7 @@ export default async function ProtectedPage() {
 
 				{/* SEZIONE ANNUNCI */}
 
-				<div className='flex flex-col items-center gap-20 px-3 w-full animate-in mb-auto'>
+				<div className='flex flex-col items-center gap-20  w-full animate-in mb-auto'>
 					<div className='p-4 border-2 border-zinc-200 rounded-md w-full'>
 						<div className='flex gap-4 w-full'>
 							<Link
