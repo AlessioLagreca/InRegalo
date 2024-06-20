@@ -23,7 +23,7 @@ export default async function ProtectedPage() {
 					<nav className='flex justify-center w-full h-16 border-b border-b-foreground/10'>
 						<div className='flex justify-between items-center p-3 w-full max-w-4xl text-sm'>
 							<Link
-								href='/protected'
+								href='/'
 								className='text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-500'
 							>
 								InRegalo

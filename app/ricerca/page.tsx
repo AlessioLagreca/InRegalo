@@ -16,10 +16,6 @@ export default async function ProtectedPage() {
 		data: { user },
 	} = await supabase.auth.getUser();
 
-	if (!user) {
-		return redirect("/login");
-	}
-
 	const cookieStore = cookies();
 	const hasCookie = cookieStore.get("query");
 
@@ -42,7 +38,7 @@ export default async function ProtectedPage() {
 						<div className='flex justify-between items-center p-3 w-full max-w-4xl text-sm'>
 							<Link
 								prefetch={false}
-								href='/protected'
+								href='/'
 								className='text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-500'
 							>
 								InRegalo
