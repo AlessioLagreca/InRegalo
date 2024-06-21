@@ -4,6 +4,7 @@ import Link from "next/link";
 import Container from "@/components/wrappers/container";
 import { Button } from "@/components/ui/button";
 import SearchBar from "@/components/search-bar";
+import SelectCat from "@/components/selectCat";
 
 export default async function ProtectedPage() {
 	const supabase = createClient();
@@ -14,9 +15,9 @@ export default async function ProtectedPage() {
 
 	return (
 		<Container>
-			<div className='flex flex-col flex-1 gap-4 items-center w-full'>
+			<div className='flex flex-col flex-1 gap-4 items-center w-full '>
 				<div className='w-full'>
-					<div className='py-3 font-bold text-center bg-gradient-to-r from-green-100 to-green-200'>
+					<div className='py-3 px-2 sm text-sm sm:text-xl font-bold sm:text-center bg-gradient-to-r from-green-100 to-green-200'>
 						Benvenuto in InRegalo, il posto dove gestire i tuoi regali
 					</div>
 					<nav className='flex justify-center w-full h-16 border-b border-b-foreground/10'>
@@ -35,9 +36,9 @@ export default async function ProtectedPage() {
 
 				{/* SEZIONE ANNUNCI */}
 
-				<div className='flex flex-col items-center gap-20 w-full animate-in mb-auto'>
-					<div className='p-4 border-2 border-zinc-200 rounded-md w-full'>
-						<div className='flex gap-4 w-full'>
+				<div className='px-2 sm:px-0 flex flex-col items-center gap-8 sm:gap-8 w-full animate-in mb-auto'>
+					<div className='sm:p-4 sm:block hidden p-2 border-2 border-zinc-200 rounded-md w-full'>
+						<div className='flex flex-wrap gap-4 w-full'>
 							<Link
 								prefetch={false}
 								href='/nuovo_annuncio'
@@ -92,7 +93,10 @@ export default async function ProtectedPage() {
 							</Link>
 						</div>
 					</div>
-					<SearchBar />
+					<div className='flex gap-4 w-full justify-center items-center'>
+						<SearchBar />
+						<SelectCat />
+					</div>
 					<div className='flex flex-col gap-4 w-full justify-center items-center'>
 						<h1 className='text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-500'>
 							Dai via quello che non vuoi +

@@ -29,7 +29,7 @@ export default function SearchBar() {
 			onKeyDown={gestisciRicerca}
 			type='text'
 			placeholder='Cerca annunci'
-			className='border-2 border-zinc-300 rounded-3xl max-w-2xl w-full py-6 text-lg focus:outline-none focus:ring-2 focus-visible:outline-none focus:ring-gray-300'
+			className='max-w-2xl w-full py-6 text-lg focus:outline-none hover:border-gray-400 focus:ring-2 focus-visible:outline-none focus:ring-gray-300'
 		/>
 	);
 }

@@ -109,7 +109,7 @@ const FormAnnuncio: React.FC<Props> = ({ id }) => {
 	return (
 		<>
 			<Toaster richColors />
-			<div className='flex flex-col flex-1 gap-20 px-3 w-[700px] opacity-01 animate-in'>
+			<div className='flex flex-col flex-1 gap-20 sm:px-3 w-full sm:w-[700px] opacity-01 animate-in'>
 				<Form {...form}>
 					{/* handleSubmit è una funzione che gestisce il submit del form e passa alla funzione onSubmit
 					i valori degli input del form, salvati poi nella variabile values */}
