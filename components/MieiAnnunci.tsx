@@ -51,8 +51,9 @@ const MieiAnnunci: React.FC<Props> = ({ id }) => {
 								<Image
 									src={annuncio.image}
 									alt={annuncio.title}
-									objectFit='cover'
+									style={{ objectFit: "cover" }}
 									fill
+									sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
 									className='w-full h-full top-0 left-0 object-cover rounded-2xl'
 								/>
 							</div>

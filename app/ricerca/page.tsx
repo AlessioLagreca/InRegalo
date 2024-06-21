@@ -19,7 +19,7 @@ export default async function ProtectedPage() {
 	const cookieStore = cookies();
 	const hasCookie = cookieStore.get("query");
 
-	const { data, error } = await supabase
+	const { data: annunciData, error } = await supabase
 		.from("Annunci")
 		.select()
 		.textSearch("description", hasCookie?.value || "");
@@ -111,9 +111,9 @@ export default async function ProtectedPage() {
 
 				{/* RISULTATI RICERCA */}
 
-				{/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+				<pre>{JSON.stringify(hasCookie, null, 2)}</pre>
 
-				{data?.map((annuncio) => (
+				{annunciData?.map((annuncio) => (
 					<div
 						key={annuncio.id}
 						className='cursor-pointer border border-input bg-background hover:bg-accent hover:text-accent-foreground items-center justify-center whitespace-nowrap rounded-md text-base font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 p-4'
@@ -134,14 +134,14 @@ export default async function ProtectedPage() {
 
 				<footer className='flex justify-center p-8 w-full text-xs text-center border-t border-t-foreground/10'>
 					<p>
-						Powered by{" "}
+						Sviluppato da{" "}
 						<a
 							href='https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs'
 							target='_blank'
 							className='font-bold hover:underline'
 							rel='noreferrer'
 						>
-							Supabase
+							Alessio Lagreca
 						</a>
 					</p>
 				</footer>

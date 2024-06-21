@@ -35,7 +35,7 @@ export default async function ProtectedPage() {
 
 				{/* SEZIONE ANNUNCI */}
 
-				<div className='flex flex-col items-center gap-20  w-full animate-in mb-auto'>
+				<div className='flex flex-col items-center gap-20 w-full animate-in mb-auto'>
 					<div className='p-4 border-2 border-zinc-200 rounded-md w-full'>
 						<div className='flex gap-4 w-full'>
 							<Link
@@ -104,14 +104,14 @@ export default async function ProtectedPage() {
 
 				<footer className='flex justify-center p-8 w-full text-xs text-center border-t border-t-foreground/10'>
 					<p>
-						Powered by{" "}
+						Sviluppato da{" "}
 						<a
 							href='https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs'
 							target='_blank'
 							className='font-bold hover:underline'
 							rel='noreferrer'
 						>
-							Supabase
+							Alessio Lagreca
 						</a>
 					</p>
 				</footer>

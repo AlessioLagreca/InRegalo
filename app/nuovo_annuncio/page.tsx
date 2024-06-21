@@ -37,14 +37,14 @@ export default async function ProtectedPage() {
 
 				<footer className='flex justify-center p-8 w-full text-xs text-center border-t border-t-foreground/10'>
 					<p>
-						Powered by{" "}
+						Sviluppato da{" "}
 						<a
 							href='https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs'
 							target='_blank'
 							className='font-bold hover:underline'
 							rel='noreferrer'
 						>
-							Supabase
+							Alessio Lagreca
 						</a>
 					</p>
 				</footer>
