@@ -55,6 +55,7 @@ export default function SearchBar() {
       window.location.href = "/ricerca";
     } else {
       Cookies.set("query", elementoRicerca);
+      Cookies.set("querycategoria", categoria);
       window.location.href = "/ricerca";
     }
   };
@@ -91,7 +92,10 @@ export default function SearchBar() {
                 <FormLabel>Categoria</FormLabel>
                 <FormControl>
                   <Select
-                    onValueChange={field.onChange}
+                    onValueChange={(value) => {
+                      field.onChange(value); // Trigger form field change
+                      setCategoria(value); // Update local state
+                    }}
                     defaultValue={field.value}
                     {...field}
                   >
